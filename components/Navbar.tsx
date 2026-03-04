@@ -10,31 +10,28 @@ import type { User } from '@/types';
 interface NavLink {
   label: string;
   href: string;
-  external?: boolean;
 }
 
-const guestLinks: NavLink[] = [
+/* Center nav links per role */
+const guestNavLinks: NavLink[] = [
   { label: '找美容師', href: '/groomers' },
-  { label: '服務', href: '/pet-services' },
-  { label: '成為美容師', href: '/become-groomer' },
-  { label: '登入', href: '/auth/login' },
+  { label: '找服務', href: '/pet-services' },
 ];
 
-const customerLinks: NavLink[] = [
+const customerNavLinks: NavLink[] = [
   { label: '找美容師', href: '/groomers' },
-  { label: '服務', href: '/pet-services' },
+  { label: '找服務', href: '/pet-services' },
   { label: '我的預約', href: '/account/bookings' },
-  { label: '帳號', href: '/account' },
 ];
 
-const groomerLinks: NavLink[] = [
+const groomerNavLinks: NavLink[] = [
   { label: '儀表板', href: '/pro/dashboard' },
   { label: '訂單', href: '/pro/bookings' },
   { label: '收入', href: '/pro/earnings' },
   { label: '設定', href: '/pro/settings' },
 ];
 
-const adminLinks: NavLink[] = [
+const adminNavLinks: NavLink[] = [
   { label: '儀表板', href: '/admin/dashboard' },
   { label: '美容師管理', href: '/admin/professionals' },
   { label: '訂單', href: '/admin/bookings' },
@@ -42,16 +39,16 @@ const adminLinks: NavLink[] = [
   { label: '資源', href: '/admin/resources' },
 ];
 
-function getLinksForRole(role: string | null): NavLink[] {
+function getNavLinks(role: string | null): NavLink[] {
   switch (role) {
     case 'customer':
-      return customerLinks;
+      return customerNavLinks;
     case 'groomer':
-      return groomerLinks;
+      return groomerNavLinks;
     case 'admin':
-      return adminLinks;
+      return adminNavLinks;
     default:
-      return guestLinks;
+      return guestNavLinks;
   }
 }
 
@@ -66,7 +63,6 @@ export default function Navbar() {
     setUser(getCurrentUser());
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -77,7 +73,8 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const links = getLinksForRole(user?.role ?? null);
+  const navLinks = getNavLinks(user?.role ?? null);
+  const isGuest = !user;
 
   function handleLogout() {
     logout();
@@ -91,42 +88,32 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-white/95 border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-[72px] items-center justify-between">
-          {/* Logo — links to main website */}
-          <a href="https://pawpawspace.com" className="flex items-center gap-2">
+          {/* Left — Logo */}
+          <a href="https://pawpawspace.com" className="flex items-center gap-2 shrink-0">
             <Image src="/logo.svg" alt="Paw Paw" width={36} height={36} className="rounded-lg" />
-            <span>
+            <span className="hidden sm:inline">
               <span className="text-[#4884B8] font-semibold">Paw Paw</span>
               <span className="ml-1.5 text-gray-500 font-medium">泡泡</span>
             </span>
           </a>
 
-          {/* Desktop nav links */}
-          <div className="hidden md:flex md:items-center md:gap-1">
-            {links.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#111827] hover:bg-gray-100 transition-colors"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#111827] hover:bg-gray-100 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ),
-            )}
+          {/* Center — Nav links (desktop) */}
+          <div className="hidden md:flex md:items-center md:justify-center md:gap-2 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-lg px-4 py-2 font-medium transition-colors hover:text-[#4884B8] hover:bg-[#DBEAF5]/50 ${
+                  isGuest ? 'text-base text-gray-800' : 'text-sm text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop right side */}
-          <div className="hidden md:flex md:items-center md:gap-3">
+          {/* Right — Login button or user dropdown */}
+          <div className="hidden md:flex md:items-center md:gap-3 shrink-0">
             {user ? (
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -153,6 +140,18 @@ export default function Navbar() {
                       <p className="text-sm font-medium text-gray-900">{user.name}</p>
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
+                    {user.role === 'customer' && (
+                      <Link
+                        href="/account"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        帳號設定
+                      </Link>
+                    )}
                     <button
                       onClick={handleLogout}
                       className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
@@ -170,7 +169,14 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-            ) : null}
+            ) : (
+              <Link
+                href="/auth/login"
+                className="rounded-lg bg-[#4884B8] px-5 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#3D77AB] active:bg-[#366A9A] transition-colors"
+              >
+                登入
+              </Link>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -196,30 +202,18 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="border-t border-gray-100 bg-white md:hidden">
           <div className="space-y-1 px-4 py-3">
-            {links.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ),
-            )}
-            {user && (
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {user ? (
               <>
                 <div className="my-2 border-t border-gray-100" />
                 <div className="flex items-center gap-3 px-3 py-2">
@@ -231,6 +225,15 @@ export default function Navbar() {
                     <p className="text-xs text-gray-500">{user.email}</p>
                   </div>
                 </div>
+                {user.role === 'customer' && (
+                  <Link
+                    href="/account"
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    帳號設定
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50 transition-colors"
@@ -245,6 +248,17 @@ export default function Navbar() {
                   </svg>
                   登出
                 </button>
+              </>
+            ) : (
+              <>
+                <div className="my-2 border-t border-gray-100" />
+                <Link
+                  href="/auth/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-lg bg-[#4884B8] px-3 py-2.5 text-center text-base font-medium text-white hover:bg-[#3D77AB] transition-colors"
+                >
+                  登入
+                </Link>
               </>
             )}
           </div>
