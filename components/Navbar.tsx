@@ -17,7 +17,6 @@ const guestLinks: NavLink[] = [
   { label: '找美容師', href: '/groomers' },
   { label: '服務', href: '/pet-services' },
   { label: '成為美容師', href: '/become-groomer' },
-  { label: '網站', href: 'https://pawpawspace.com', external: true },
   { label: '登入', href: '/auth/login' },
 ];
 
