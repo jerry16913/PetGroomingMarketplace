@@ -69,14 +69,14 @@ export default function AccountPage() {
 
   if (!authChecked) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Skeleton variant="rect" height={200} />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">
@@ -132,9 +132,9 @@ export default function AccountPage() {
           <Link href="/account/bookings">
             <Card hover>
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-50">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#DBEAF5]">
                   <svg
-                    className="h-6 w-6 text-blue-600"
+                    className="h-6 w-6 text-[#4884B8]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

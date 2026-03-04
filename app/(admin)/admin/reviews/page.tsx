@@ -51,7 +51,10 @@ export default function AdminReviewsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">評價管理</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">評價管理</h1>
+          <p className="text-sm text-gray-500 mt-1">檢視與管理平台上的所有顧客評價。</p>
+        </div>
         <Skeleton variant="rect" height={400} />
       </div>
     );
@@ -162,7 +165,10 @@ export default function AdminReviewsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">評價管理</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">評價管理</h1>
+          <p className="text-sm text-gray-500 mt-1">檢視與管理平台上的所有顧客評價。</p>
+        </div>
         {hiddenIds.size > 0 && (
           <span className="text-sm text-gray-500">已隱藏 {hiddenIds.size} 則評價</span>
         )}

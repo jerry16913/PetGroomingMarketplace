@@ -3,9 +3,9 @@ import '@/styles/globals.css';
 import { ToastProvider } from '@/components/ui/Toast';
 
 export const metadata: Metadata = {
-  title: '寵物美容預約平台',
+  title: 'Paw Paw 泡泡｜寵物美容預約系統',
   description:
-    '找到最適合你毛孩的寵物美容師',
+    '預約寵物美容服務、管理會員帳號、美容師後台管理。',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-TW">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
+      <body className="min-h-screen bg-[#F9FAFB] text-[#111827] antialiased">
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

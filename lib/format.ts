@@ -82,7 +82,7 @@ export function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
     // Booking statuses
     pending: 'text-yellow-600 bg-yellow-50',
-    confirmed: 'text-blue-600 bg-blue-50',
+    confirmed: 'text-[#4884B8] bg-[#DBEAF5]',
     completed: 'text-green-600 bg-green-50',
     cancelled: 'text-gray-600 bg-gray-50',
     no_show: 'text-red-600 bg-red-50',

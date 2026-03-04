@@ -23,9 +23,9 @@ interface ToastContextValue {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 const typeStyles: Record<ToastType, string> = {
-  success: 'bg-green-600',
+  success: 'bg-emerald-600',
   error: 'bg-red-600',
-  info: 'bg-blue-600',
+  info: 'bg-gray-800',
 };
 
 const typeIcons: Record<ToastType, React.ReactNode> = {
@@ -57,9 +57,10 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
   return (
     <div
       className={`
-        flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white shadow-lg
+        flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-white
+        shadow-lg ring-1 ring-black/5
         ${typeStyles[toast.type]}
-        animate-in slide-in-from-right fade-in duration-200
+        toast-enter
       `}
       role="alert"
     >

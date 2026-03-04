@@ -30,7 +30,7 @@ export default function Skeleton({
 
   return (
     <div
-      className={`animate-pulse bg-gray-200 ${variantClasses[variant]} ${className}`}
+      className={`animate-pulse bg-gray-100 ${variantClasses[variant]} ${className}`}
       style={style}
       aria-hidden="true"
     />

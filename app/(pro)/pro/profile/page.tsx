@@ -101,7 +101,7 @@ export default function ProProfilePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">個人資料</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">個人資料</h1>
         <p className="mt-1 text-sm text-gray-500">
           管理您的公開檔案與聯絡資訊。
         </p>
@@ -180,7 +180,7 @@ export default function ProProfilePage() {
 
           {/* Preview for newly selected file */}
           {previewUrl && (
-            <div className="relative aspect-square overflow-hidden rounded-lg border-2 border-dashed border-blue-300 bg-blue-50">
+            <div className="relative aspect-square overflow-hidden rounded-lg border-2 border-dashed border-[#4884B8] bg-[#DBEAF5]">
               <img
                 src={previewUrl}
                 alt="新上傳預覽"

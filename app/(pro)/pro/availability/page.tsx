@@ -82,7 +82,7 @@ export default function ProAvailabilityPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">預約時段</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">預約時段</h1>
         <p className="mt-1 text-sm text-gray-500">
           點擊時段切換可用/不可用，藍色代表可預約。
         </p>
@@ -125,13 +125,13 @@ export default function ProAvailabilityPage() {
                 <div
                   key={i}
                   className={`border-r border-gray-200 px-2 py-3 text-center last:border-r-0 ${
-                    isToday ? 'bg-blue-50' : 'bg-gray-50'
+                    isToday ? 'bg-[#DBEAF5]' : 'bg-gray-50'
                   }`}
                 >
                   <div className="text-xs text-gray-500">週{DAY_LABELS[i]}</div>
                   <div
                     className={`mt-0.5 text-sm font-medium ${
-                      isToday ? 'text-blue-600' : 'text-gray-900'
+                      isToday ? 'text-[#4884B8]' : 'text-gray-900'
                     }`}
                   >
                     {date.format('MM/DD')}
@@ -161,7 +161,7 @@ export default function ProAvailabilityPage() {
                       border-r border-gray-100 px-1 py-1 text-xs transition-colors last:border-r-0
                       ${
                         available
-                          ? 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                          ? 'bg-[#DBEAF5] text-[#4884B8] hover:bg-[#CBE0F2]'
                           : 'bg-white text-gray-300 hover:bg-gray-50'
                       }
                     `}

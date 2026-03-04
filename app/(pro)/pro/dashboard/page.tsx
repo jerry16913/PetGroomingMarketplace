@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import StatsCards from '@/components/StatsCards';
+import Card from '@/components/ui/Card';
 import DataTable from '@/components/ui/DataTable';
 import Button from '@/components/ui/Button';
 import Skeleton from '@/components/ui/Skeleton';
@@ -127,7 +128,7 @@ export default function ProDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">儀表板</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">儀表板</h1>
         <p className="mt-1 text-sm text-gray-500">
           歡迎回來！以下是您的服務概況。
         </p>
@@ -148,9 +149,9 @@ export default function ProDashboardPage() {
       )}
 
       {/* Today's bookings */}
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <Card padding="none">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-base font-semibold text-gray-900">
             今日訂單 ({formatDate(dayjs().toISOString())})
           </h2>
         </div>
@@ -161,7 +162,7 @@ export default function ProDashboardPage() {
           emptyMessage="今日尚無訂單"
           onRowClick={(row) => router.push(`/pro/bookings/${row.id}`)}
         />
-      </div>
+      </Card>
 
       {/* Quick actions */}
       <div className="flex flex-wrap gap-3">

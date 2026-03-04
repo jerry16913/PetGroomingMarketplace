@@ -52,12 +52,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-64px-160px)] items-center justify-center px-4 py-12">
+    <div className="flex min-h-[calc(100vh-64px-160px)] items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">登入</h1>
           <p className="mt-2 text-sm text-gray-500">
-            歡迎回到寵物美容預約平台
+            歡迎回到 Paw Paw 泡泡
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function LoginPage() {
             還沒有帳號？{' '}
             <Link
               href="/auth/register"
-              className="font-medium text-blue-600 hover:text-blue-700"
+              className="font-medium text-[#4884B8] hover:text-[#3E78AC]"
             >
               立即註冊
             </Link>
@@ -104,7 +104,7 @@ export default function LoginPage() {
         </Card>
 
         {/* Test Accounts */}
-        <div className="mt-6 rounded-xl border border-gray-200 bg-white p-6">
+        <Card className="mt-6">
           <h3 className="text-sm font-semibold text-gray-900 mb-3">
             測試帳號
           </h3>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                   setEmail('customer@test.com');
                   setPassword('password');
                 }}
-                className="text-xs text-blue-600 hover:text-blue-700"
+                className="text-xs text-[#4884B8] hover:text-[#3E78AC]"
               >
                 填入
               </button>
@@ -139,7 +139,7 @@ export default function LoginPage() {
                   setEmail('pro@test.com');
                   setPassword('password');
                 }}
-                className="text-xs text-blue-600 hover:text-blue-700"
+                className="text-xs text-[#4884B8] hover:text-[#3E78AC]"
               >
                 填入
               </button>
@@ -155,13 +155,13 @@ export default function LoginPage() {
                   setEmail('admin@test.com');
                   setPassword('password');
                 }}
-                className="text-xs text-blue-600 hover:text-blue-700"
+                className="text-xs text-[#4884B8] hover:text-[#3E78AC]"
               >
                 填入
               </button>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

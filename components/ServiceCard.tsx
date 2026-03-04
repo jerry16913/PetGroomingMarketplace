@@ -4,6 +4,19 @@ import type { Service } from '@/types';
 import { formatPrice, formatDuration } from '@/lib/format';
 import Card from '@/components/ui/Card';
 
+const serviceIcons: Record<string, string> = {
+  '狗狗洗澡': '🛁',
+  '狗狗美容': '✂️',
+  '貓咪美容': '🐱',
+  '貓咪洗澡': '🛁',
+  '小型犬美容': '🐩',
+  '中型犬美容': '🐕',
+  '大型犬美容': '🦮',
+  '特殊造型': '💇',
+  '寵物 SPA': '💆',
+  '比賽造型': '🏆',
+};
+
 interface ServiceCardProps {
   service: Service;
   className?: string;
@@ -18,11 +31,16 @@ export default function ServiceCard({
       ? service.description.slice(0, 80) + '...'
       : service.description;
 
+  const icon = serviceIcons[service.name] ?? '🐾';
+
   return (
     <Card hover className={className}>
       <div className="flex flex-col gap-3">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-2">
+        {/* Header: icon + title */}
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-50 text-xl">
+            {icon}
+          </div>
           <h3 className="text-base font-semibold text-gray-900">{service.name}</h3>
         </div>
 
@@ -42,7 +60,7 @@ export default function ServiceCard({
             </svg>
             <span>{formatDuration(service.durationMinutes)}</span>
           </div>
-          <span className="text-base font-semibold text-gray-900">
+          <span className="text-gray-900 font-semibold">
             {formatPrice(service.basePrice)}
           </span>
         </div>
@@ -50,7 +68,7 @@ export default function ServiceCard({
         {/* CTA */}
         <Link
           href={`/groomers?service=${service.id}`}
-          className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+          className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
         >
           瀏覽美容師
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

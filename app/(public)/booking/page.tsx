@@ -15,7 +15,7 @@ import { getCurrentUser } from '@/lib/auth';
 import { formatPrice, formatDuration } from '@/lib/format';
 import type { Groomer, Service, Pet } from '@/types';
 
-const STEPS = ['選美容師', '選服務', '選寵物', '選日期', '選時間', '確認'];
+const STEPS = ['選美容師', '選服務', '選寵物', '選時間', '確認'];
 
 // Generate time slots every 30 minutes from 09:00 to 18:00
 function generateAllSlots(): string[] {
@@ -38,7 +38,7 @@ function getAvailableSlots(date: string): string[] {
 
 export default function BookingPage() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-3xl px-4 py-10"><Skeleton variant="rect" height={300} /></div>}>
+    <Suspense fallback={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><Skeleton variant="rect" height={300} /></div>}>
       <BookingContent />
     </Suspense>
   );
@@ -156,7 +156,7 @@ function BookingContent() {
   }, [selectedDate, selectedSlot, selectedServiceId, groomerServices, selectedService]);
 
   useEffect(() => {
-    if (currentStep === 5) {
+    if (currentStep === 4) {
       fetchResourceAssignments();
     }
   }, [currentStep]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -170,10 +170,8 @@ function BookingContent() {
       case 2:
         return !!selectedPetId;
       case 3:
-        return !!selectedDate;
+        return !!selectedDate && !!selectedSlot;
       case 4:
-        return !!selectedSlot;
-      case 5:
         return true;
       default:
         return false;
@@ -181,7 +179,7 @@ function BookingContent() {
   };
 
   const handleNext = () => {
-    if (currentStep === 5) {
+    if (currentStep === 4) {
       // Navigate to confirm page with all data
       const resolvedService = groomerServices.find(
         (s) => s.id === selectedServiceId,
@@ -225,7 +223,7 @@ function BookingContent() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Skeleton variant="rect" height={60} className="mb-8" />
         <Skeleton variant="rect" height={300} />
       </div>
@@ -234,7 +232,7 @@ function BookingContent() {
 
   if (error) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="rounded-lg bg-red-50 p-6 text-center text-red-600">
           {error}
         </div>
@@ -244,7 +242,7 @@ function BookingContent() {
 
   if (!groomer) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="rounded-lg bg-yellow-50 p-6 text-center text-yellow-700">
           請從美容師頁面選擇要預約的美容師。
         </div>
@@ -258,7 +256,7 @@ function BookingContent() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">預約服務</h1>
@@ -268,7 +266,7 @@ function BookingContent() {
       </div>
 
       {/* Stepper */}
-      <BookingStepper currentStep={currentStep} steps={STEPS} className="mb-10" />
+      <BookingStepper currentStep={currentStep} steps={STEPS} className="mb-8" />
 
       {/* Step Content */}
       <div className="mb-8">
@@ -278,7 +276,7 @@ function BookingContent() {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               選擇美容師
             </h2>
-            <Card className="ring-2 ring-blue-500 border-blue-500">
+            <Card className="ring-2 ring-[#4884B8] border-[#4884B8]">
               <div className="flex items-center gap-4">
                 <img
                   src={groomer.avatarUrl}
@@ -310,7 +308,7 @@ function BookingContent() {
                   onClick={() => setSelectedServiceId(svc.id)}
                   className={
                     selectedServiceId === svc.id
-                      ? 'ring-2 ring-blue-500 border-blue-500'
+                      ? 'ring-2 ring-[#4884B8] border-[#4884B8]'
                       : ''
                   }
                 >
@@ -364,12 +362,12 @@ function BookingContent() {
                     onClick={() => setSelectedPetId(pet.id)}
                     className={
                       selectedPetId === pet.id
-                        ? 'ring-2 ring-blue-500 border-blue-500'
+                        ? 'ring-2 ring-[#4884B8] border-[#4884B8]'
                         : ''
                     }
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-2xl">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#DBEAF5] text-2xl">
                         🐾
                       </div>
                       <div>
@@ -388,13 +386,13 @@ function BookingContent() {
           </div>
         )}
 
-        {/* Step 3: Select Date */}
+        {/* Step 3: Select Date & Time */}
         {currentStep === 3 && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              選擇日期
+              選擇日期與時段
             </h2>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-6">
               <CalendarPicker
                 selectedDate={selectedDate}
                 onDateSelect={(date) => {
@@ -403,28 +401,26 @@ function BookingContent() {
                 }}
               />
             </div>
+            {selectedDate && (
+              <div>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">
+                  選擇時段
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  日期：{selectedDate}
+                </p>
+                <TimeSlotPicker
+                  slots={availableSlots}
+                  selectedSlot={selectedSlot}
+                  onSlotSelect={setSelectedSlot}
+                />
+              </div>
+            )}
           </div>
         )}
 
-        {/* Step 4: Select Time Slot */}
+        {/* Step 4: Confirmation Summary */}
         {currentStep === 4 && (
-          <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
-              選擇時段
-            </h2>
-            <p className="text-sm text-gray-500 mb-4">
-              日期：{selectedDate}
-            </p>
-            <TimeSlotPicker
-              slots={availableSlots}
-              selectedSlot={selectedSlot}
-              onSlotSelect={setSelectedSlot}
-            />
-          </div>
-        )}
-
-        {/* Step 5: Confirmation Summary */}
-        {currentStep === 5 && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               確認預約資訊
@@ -495,7 +491,7 @@ function BookingContent() {
                   <span className="text-base font-semibold text-gray-900">
                     費用
                   </span>
-                  <span className="text-base font-semibold text-blue-600">
+                  <span className="text-base font-semibold text-[#4884B8]">
                     {formatPrice(
                       groomerServices.find((s) => s.id === selectedServiceId)
                         ?.price ??
@@ -520,7 +516,7 @@ function BookingContent() {
           上一步
         </Button>
         <Button onClick={handleNext} disabled={!canGoNext()}>
-          {currentStep === 5 ? '前往確認' : '下一步'}
+          {currentStep === 4 ? '前往確認' : '下一步'}
         </Button>
       </div>
     </div>

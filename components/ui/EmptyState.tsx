@@ -15,7 +15,7 @@ interface EmptyStateProps {
 
 const defaultIcon = (
   <svg
-    className="h-12 w-12 text-gray-300"
+    className="h-8 w-8 text-gray-400"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -37,8 +37,10 @@ export default function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-      <div className="mb-4">{icon || defaultIcon}</div>
-      <h3 className="text-base font-semibold text-gray-900">{title}</h3>
+      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-50">
+        {icon || defaultIcon}
+      </div>
+      <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
       {description && (
         <p className="mt-1 text-sm text-gray-500 max-w-sm">{description}</p>
       )}

@@ -14,25 +14,26 @@ interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  icon?: React.ReactNode;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 focus-visible:ring-blue-500',
+    'bg-[#4884B8] text-white hover:bg-[#3D77AB] active:bg-[#366A9A] shadow-sm hover:shadow focus-visible:ring-[#4884B8]',
   secondary:
-    'bg-gray-100 text-gray-800 hover:bg-gray-200 active:bg-gray-300 focus-visible:ring-gray-400',
+    'bg-[#DBEAF5] text-[#4884B8] hover:bg-[#CEE2F3] active:bg-[#BED8ED] focus-visible:ring-[#4884B8]',
   outline:
-    'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 focus-visible:ring-gray-400',
+    'border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-100 shadow-sm focus-visible:ring-gray-400',
   danger:
-    'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus-visible:ring-red-500',
+    'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 shadow-sm focus-visible:ring-red-500',
   ghost:
-    'text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus-visible:ring-gray-400',
+    'text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:bg-gray-200 focus-visible:ring-gray-400',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-sm rounded-md',
-  md: 'px-4 py-2 text-sm rounded-lg',
-  lg: 'px-6 py-3 text-base rounded-lg',
+  sm: 'h-8 px-3 text-sm gap-1.5 rounded-lg',
+  md: 'h-9 px-4 text-sm gap-2 rounded-lg',
+  lg: 'h-10 px-5 text-sm gap-2 rounded-lg',
 };
 
 export default function Button({
@@ -44,6 +45,7 @@ export default function Button({
   onClick,
   className = '',
   type = 'button',
+  icon,
 }: ButtonProps) {
   const isDisabled = disabled || loading;
 
@@ -53,10 +55,10 @@ export default function Button({
       onClick={onClick}
       disabled={isDisabled}
       className={`
-        inline-flex items-center justify-center gap-2 font-medium
-        transition-colors duration-150 ease-in-out
+        inline-flex items-center justify-center font-medium
+        transition-all duration-150 ease-in-out
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-        disabled:opacity-50 disabled:cursor-not-allowed
+        disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
         ${variantClasses[variant]}
         ${sizeClasses[size]}
         ${className}
@@ -64,11 +66,12 @@ export default function Button({
     >
       {loading && (
         <span
-          className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+          className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent"
           role="status"
           aria-label="Loading"
         />
       )}
+      {!loading && icon && <span className="shrink-0">{icon}</span>}
       {children}
     </button>
   );

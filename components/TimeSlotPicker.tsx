@@ -35,8 +35,8 @@ export default function TimeSlotPicker({
               rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors
               ${
                 isSelected
-                  ? 'border-blue-600 bg-blue-600 text-white'
-                  : 'border-gray-200 bg-white text-gray-700 hover:border-blue-300 hover:bg-blue-50'
+                  ? 'border-[#4884B8] bg-[#4884B8] text-white'
+                  : 'border-gray-200 bg-white text-gray-700 hover:border-[#4884B8]/50 hover:bg-[#DBEAF5]'
               }
             `}
           >

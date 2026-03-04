@@ -9,7 +9,7 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      <main className="min-h-[calc(100vh-64px-160px)] pt-16">{children}</main>
+      <main className="min-h-[calc(100vh-72px-160px)] pt-[72px]">{children}</main>
       <Footer />
     </>
   );

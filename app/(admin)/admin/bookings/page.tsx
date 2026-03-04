@@ -13,6 +13,7 @@ import {
   getPaymentStatusLabel,
 } from '@/lib/format';
 import DataTable from '@/components/ui/DataTable';
+import Badge from '@/components/ui/Badge';
 import Tabs from '@/components/ui/Tabs';
 import Skeleton from '@/components/ui/Skeleton';
 
@@ -57,7 +58,10 @@ export default function AdminBookingsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">訂單管理</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">訂單管理</h1>
+          <p className="text-sm text-gray-500 mt-1">檢視與管理所有預約訂單。</p>
+        </div>
         <Skeleton variant="rect" height={48} />
         <Skeleton variant="rect" height={400} />
       </div>
@@ -115,25 +119,28 @@ export default function AdminBookingsPage() {
       key: 'status',
       label: '狀態',
       render: (row: Record<string, unknown>) => (
-        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor(row.status as string)}`}>
+        <Badge className={getStatusColor(row.status as string)}>
           {getStatusLabel(row.status as string)}
-        </span>
+        </Badge>
       ),
     },
     {
       key: 'paymentStatus',
       label: '付款',
       render: (row: Record<string, unknown>) => (
-        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor(row.paymentStatus as string)}`}>
+        <Badge className={getStatusColor(row.paymentStatus as string)}>
           {getPaymentStatusLabel(row.paymentStatus as string)}
-        </span>
+        </Badge>
       ),
     },
   ];
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">訂單管理</h1>
+      <div>
+        <h1 className="text-2xl font-semibold text-gray-900">訂單管理</h1>
+        <p className="text-sm text-gray-500 mt-1">檢視與管理所有預約訂單。</p>
+      </div>
 
       <Tabs tabs={statusTabs} activeTab={activeTab} onChange={setActiveTab} />
 

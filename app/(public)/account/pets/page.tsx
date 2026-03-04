@@ -157,7 +157,7 @@ export default function PetsPage() {
 
   if (error) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="rounded-lg bg-red-50 p-6 text-center text-red-600">
           {error}
         </div>
@@ -166,7 +166,7 @@ export default function PetsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Page Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
@@ -195,7 +195,7 @@ export default function PetsPage() {
               <div className="flex flex-col gap-4">
                 {/* Pet Header */}
                 <div className="flex items-start gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-3xl shrink-0">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#DBEAF5] text-3xl shrink-0">
                     🐾
                   </div>
                   <div className="flex-1 min-w-0">

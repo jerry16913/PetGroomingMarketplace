@@ -27,14 +27,14 @@ export default function DataTable<T extends Record<string, unknown>>({
 }: DataTableProps<T>) {
   if (loading) {
     return (
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
+      <div className="border border-gray-200 rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-200 bg-gray-50">
+            <tr className="border-b border-gray-200 bg-gray-50/80">
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className="whitespace-nowrap px-4 py-3 text-left font-medium text-gray-500"
+                  className="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   {col.label}
                 </th>
@@ -46,7 +46,7 @@ export default function DataTable<T extends Record<string, unknown>>({
               <tr key={rowIdx} className="border-b border-gray-100">
                 {columns.map((col) => (
                   <td key={col.key} className="px-4 py-3">
-                    <Skeleton variant="text" width="75%" />
+                    <div className="h-4 rounded bg-gray-100 animate-pulse shimmer" style={{ width: `${60 + Math.random() * 30}%` }} />
                   </td>
                 ))}
               </tr>
@@ -59,21 +59,21 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   if (data.length === 0) {
     return (
-      <div className="rounded-xl border border-gray-200 bg-white">
+      <div className="border border-gray-200 rounded-xl overflow-hidden bg-white">
         <EmptyState title={emptyMessage} />
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200">
+    <div className="border border-gray-200 rounded-xl overflow-hidden">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
+          <tr className="border-b border-gray-200 bg-gray-50/80">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="whitespace-nowrap px-4 py-3 text-left font-medium text-gray-500"
+                className="whitespace-nowrap px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 {col.label}
               </th>
@@ -87,7 +87,7 @@ export default function DataTable<T extends Record<string, unknown>>({
               onClick={onRowClick ? () => onRowClick(row) : undefined}
               className={`
                 border-b border-gray-100 last:border-b-0
-                ${onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
+                ${onRowClick ? 'cursor-pointer hover:bg-gray-50/50' : ''}
                 transition-colors
               `}
             >

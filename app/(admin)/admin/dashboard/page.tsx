@@ -8,6 +8,7 @@ import { formatPrice, formatDate, formatTime, getStatusLabel, getStatusColor, ge
 import StatsCards from '@/components/StatsCards';
 import DataTable from '@/components/ui/DataTable';
 import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 import Skeleton from '@/components/ui/Skeleton';
 
 export default function AdminDashboardPage() {
@@ -38,7 +39,10 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">儀表板</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">儀表板</h1>
+          <p className="text-sm text-gray-500 mt-1">平台營運數據與近期訂單概覽。</p>
+        </div>
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <Skeleton key={i} variant="rect" height={120} />
@@ -138,65 +142,70 @@ export default function AdminDashboardPage() {
       key: 'status',
       label: '狀態',
       render: (row: Record<string, unknown>) => (
-        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor(row.status as string)}`}>
+        <Badge className={getStatusColor(row.status as string)}>
           {getStatusLabel(row.status as string)}
-        </span>
+        </Badge>
       ),
     },
     {
       key: 'paymentStatus',
       label: '付款',
       render: (row: Record<string, unknown>) => (
-        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor(row.paymentStatus as string)}`}>
+        <Badge className={getStatusColor(row.paymentStatus as string)}>
           {getPaymentStatusLabel(row.paymentStatus as string)}
-        </span>
+        </Badge>
       ),
     },
   ];
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">儀表板</h1>
+      <div>
+        <h1 className="text-2xl font-semibold text-gray-900">儀表板</h1>
+        <p className="text-sm text-gray-500 mt-1">平台營運數據與近期訂單概覽。</p>
+      </div>
 
       {/* Stats */}
       <StatsCards stats={stats} />
 
       {/* Recent Bookings */}
-      <div>
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">最近訂單</h2>
+      <Card padding="none">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-base font-semibold text-gray-900">最近訂單</h2>
+        </div>
         <DataTable
           columns={bookingColumns}
           data={recentBookings as unknown as Record<string, unknown>[]}
           onRowClick={(row) => router.push(`/admin/bookings/${row.id}`)}
         />
-      </div>
+      </Card>
 
       {/* Groomer Quick Stats */}
       <div>
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">美容師統計</h2>
+        <h2 className="mb-4 text-base font-semibold text-gray-900">美容師統計</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           <Card>
             <div className="text-center">
               <p className="text-sm text-gray-500">總美容師數</p>
-              <p className="mt-1 text-2xl font-bold text-gray-900">{groomers.length}</p>
+              <p className="mt-1 text-2xl font-semibold text-gray-900">{groomers.length}</p>
             </div>
           </Card>
           <Card>
             <div className="text-center">
               <p className="text-sm text-gray-500">已核准</p>
-              <p className="mt-1 text-2xl font-bold text-gray-900">{groomers.filter((g) => g.status === 'approved').length}</p>
+              <p className="mt-1 text-2xl font-semibold text-gray-900">{groomers.filter((g) => g.status === 'approved').length}</p>
             </div>
           </Card>
           <Card>
             <div className="text-center">
               <p className="text-sm text-gray-500">待審核</p>
-              <p className="mt-1 text-2xl font-bold text-gray-900">{groomers.filter((g) => g.status === 'pending').length}</p>
+              <p className="mt-1 text-2xl font-semibold text-gray-900">{groomers.filter((g) => g.status === 'pending').length}</p>
             </div>
           </Card>
           <Card>
             <div className="text-center">
               <p className="text-sm text-gray-500">已停權</p>
-              <p className="mt-1 text-2xl font-bold text-gray-900">{groomers.filter((g) => g.status === 'suspended').length}</p>
+              <p className="mt-1 text-2xl font-semibold text-gray-900">{groomers.filter((g) => g.status === 'suspended').length}</p>
             </div>
           </Card>
         </div>

@@ -7,6 +7,7 @@ import Input from '@/components/ui/Input';
 import Modal from '@/components/ui/Modal';
 import Badge from '@/components/ui/Badge';
 import Skeleton from '@/components/ui/Skeleton';
+import EmptyState from '@/components/ui/EmptyState';
 import { useToast } from '@/components/ui/Toast';
 import { getCurrentUser } from '@/lib/auth';
 import { getGroomer, getServices } from '@/lib/api';
@@ -142,7 +143,7 @@ export default function ProServicesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">服務管理</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">服務管理</h1>
         <p className="mt-1 text-sm text-gray-500">
           管理您提供的服務項目、定價與時長。
         </p>
@@ -150,7 +151,10 @@ export default function ProServicesPage() {
 
       {serviceRows.length === 0 ? (
         <Card>
-          <p className="py-8 text-center text-sm text-gray-500">尚無任何服務項目。</p>
+          <EmptyState
+            title="尚無任何服務項目"
+            description="您目前沒有設定任何服務，請聯繫管理員新增服務。"
+          />
         </Card>
       ) : (
         <div className="space-y-3">
@@ -208,7 +212,7 @@ export default function ProServicesPage() {
                     onClick={() => toggleActive(idx)}
                     className={`
                       relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200
-                      ${row.active ? 'bg-blue-600' : 'bg-gray-200'}
+                      ${row.active ? 'bg-[#4884B8]' : 'bg-gray-200'}
                     `}
                     role="switch"
                     aria-checked={row.active}

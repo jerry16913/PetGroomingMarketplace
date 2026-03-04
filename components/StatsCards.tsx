@@ -15,14 +15,14 @@ interface StatsCardsProps {
 
 export default function StatsCards({ stats, className = '' }: StatsCardsProps) {
   return (
-    <div className={`grid grid-cols-2 gap-4 lg:grid-cols-4 ${className}`}>
+    <div className={`grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4 ${className}`}>
       {stats.map((stat) => {
         // Determine change color
         const isPositive = stat.change?.startsWith('+');
         const isNegative = stat.change?.startsWith('-');
 
         return (
-          <Card key={stat.label}>
+          <Card key={stat.label} padding="sm">
             <div className="flex items-start gap-3">
               {/* Icon */}
               {stat.icon && (
@@ -33,7 +33,7 @@ export default function StatsCards({ stats, className = '' }: StatsCardsProps) {
 
               <div className="min-w-0 flex-1">
                 {/* Label */}
-                <p className="text-sm text-gray-500 truncate">{stat.label}</p>
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wide truncate">{stat.label}</p>
 
                 {/* Value */}
                 <p className="mt-1 text-2xl font-semibold text-gray-900">{stat.value}</p>
@@ -41,7 +41,7 @@ export default function StatsCards({ stats, className = '' }: StatsCardsProps) {
                 {/* Change indicator */}
                 {stat.change && (
                   <p
-                    className={`mt-1 text-sm font-medium ${
+                    className={`mt-1 text-sm font-medium inline-flex items-center gap-0.5 ${
                       isPositive
                         ? 'text-green-600'
                         : isNegative
@@ -51,7 +51,7 @@ export default function StatsCards({ stats, className = '' }: StatsCardsProps) {
                   >
                     {isPositive && (
                       <svg
-                        className="mr-0.5 inline-block h-4 w-4"
+                        className="h-3.5 w-3.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -66,7 +66,7 @@ export default function StatsCards({ stats, className = '' }: StatsCardsProps) {
                     )}
                     {isNegative && (
                       <svg
-                        className="mr-0.5 inline-block h-4 w-4"
+                        className="h-3.5 w-3.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

@@ -53,12 +53,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-64px-160px)] items-center justify-center px-4 py-12">
+    <div className="flex min-h-[calc(100vh-64px-160px)] items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">建立帳號</h1>
           <p className="mt-2 text-sm text-gray-500">
-            加入寵物美容預約平台，開始預約服務
+            加入 Paw Paw 泡泡，開始預約服務
           </p>
         </div>
 
@@ -113,7 +113,7 @@ export default function RegisterPage() {
             已經有帳號？{' '}
             <Link
               href="/auth/login"
-              className="font-medium text-blue-600 hover:text-blue-700"
+              className="font-medium text-[#4884B8] hover:text-[#3E78AC]"
             >
               登入
             </Link>

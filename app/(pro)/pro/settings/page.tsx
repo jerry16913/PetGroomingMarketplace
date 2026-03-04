@@ -30,7 +30,7 @@ export default function ProSettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">設定</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">設定</h1>
         <p className="mt-1 text-sm text-gray-500">
           管理您的通知偏好與收款方式。
         </p>
@@ -50,7 +50,7 @@ export default function ProSettingsPage() {
               onClick={() => setEmailNotif(!emailNotif)}
               className={`
                 relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200
-                ${emailNotif ? 'bg-blue-600' : 'bg-gray-200'}
+                ${emailNotif ? 'bg-[#4884B8]' : 'bg-gray-200'}
               `}
               role="switch"
               aria-checked={emailNotif}
@@ -74,7 +74,7 @@ export default function ProSettingsPage() {
               onClick={() => setSmsNotif(!smsNotif)}
               className={`
                 relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200
-                ${smsNotif ? 'bg-blue-600' : 'bg-gray-200'}
+                ${smsNotif ? 'bg-[#4884B8]' : 'bg-gray-200'}
               `}
               role="switch"
               aria-checked={smsNotif}
@@ -98,7 +98,7 @@ export default function ProSettingsPage() {
               onClick={() => setBookingNotif(!bookingNotif)}
               className={`
                 relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200
-                ${bookingNotif ? 'bg-blue-600' : 'bg-gray-200'}
+                ${bookingNotif ? 'bg-[#4884B8]' : 'bg-gray-200'}
               `}
               role="switch"
               aria-checked={bookingNotif}
@@ -122,7 +122,7 @@ export default function ProSettingsPage() {
               onClick={() => setReviewNotif(!reviewNotif)}
               className={`
                 relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200
-                ${reviewNotif ? 'bg-blue-600' : 'bg-gray-200'}
+                ${reviewNotif ? 'bg-[#4884B8]' : 'bg-gray-200'}
               `}
               role="switch"
               aria-checked={reviewNotif}

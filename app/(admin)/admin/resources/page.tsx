@@ -9,6 +9,7 @@ import {
   deleteResource,
   toggleResourceActive,
 } from '@/lib/api';
+import Card from '@/components/ui/Card';
 import DataTable from '@/components/ui/DataTable';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -285,7 +286,10 @@ export default function AdminResourcesPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">資源管理</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">資源管理</h1>
+          <p className="text-sm text-gray-500 mt-1">管理美容台、洗澡台及烘毛區等設備資源。</p>
+        </div>
         <Skeleton variant="rect" height={400} />
       </div>
     );
@@ -295,13 +299,18 @@ export default function AdminResourcesPage() {
   if (error) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">資源管理</h1>
-        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
-          <p className="text-red-600">{error}</p>
-          <Button variant="outline" className="mt-4" onClick={loadResources}>
-            重試
-          </Button>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">資源管理</h1>
+          <p className="text-sm text-gray-500 mt-1">管理美容台、洗澡台及烘毛區等設備資源。</p>
         </div>
+        <Card>
+          <div className="text-center py-6">
+            <p className="text-sm text-red-600">{error}</p>
+            <Button variant="outline" className="mt-4" onClick={loadResources}>
+              重試
+            </Button>
+          </div>
+        </Card>
       </div>
     );
   }
@@ -310,7 +319,10 @@ export default function AdminResourcesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">資源管理</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">資源管理</h1>
+          <p className="text-sm text-gray-500 mt-1">管理美容台、洗澡台及烘毛區等設備資源。</p>
+        </div>
         <Button onClick={openCreateModal}>新增資源</Button>
       </div>
 

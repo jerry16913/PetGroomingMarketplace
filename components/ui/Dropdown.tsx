@@ -44,8 +44,9 @@ export default function Dropdown({
         <div
           className={`
             absolute z-40 mt-2 min-w-[12rem]
-            rounded-lg border border-gray-200 bg-white py-1
-            shadow-lg
+            rounded-xl border-0 bg-white py-1
+            shadow-lg ring-1 ring-black/5
+            modal-enter
             ${align === 'right' ? 'right-0' : 'left-0'}
           `}
           onClick={() => setIsOpen(false)}

@@ -12,6 +12,7 @@ interface InputProps {
   id?: string;
   name?: string;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 export default function Input({
@@ -26,6 +27,7 @@ export default function Input({
   id,
   name,
   disabled = false,
+  icon,
 }: InputProps) {
   const inputId = id || name || label?.toLowerCase().replace(/\s+/g, '-');
 
@@ -40,24 +42,32 @@ export default function Input({
           {required && <span className="ml-0.5 text-red-500">*</span>}
         </label>
       )}
-      <input
-        id={inputId}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required={required}
-        disabled={disabled}
-        className={`
-          w-full rounded-lg border px-3.5 py-2.5 text-sm text-gray-900
-          placeholder:text-gray-400
-          transition-colors duration-150
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-          disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
-          ${error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
-        `}
-      />
+      <div className="relative">
+        {icon && (
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <span className="text-gray-400">{icon}</span>
+          </div>
+        )}
+        <input
+          id={inputId}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required={required}
+          disabled={disabled}
+          className={`
+            w-full rounded-lg border bg-white px-3.5 py-2 text-sm text-gray-900
+            placeholder:text-gray-400
+            transition-colors duration-150
+            focus:outline-none focus:ring-2 focus:ring-[#4884B8]/20 focus:border-[#4884B8]
+            disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
+            ${icon ? 'pl-10' : ''}
+            ${error ? 'border-red-300 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-200'}
+          `}
+        />
+      </div>
       {error && (
         <p className="text-sm text-red-600">{error}</p>
       )}

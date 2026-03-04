@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser, logout } from '@/lib/auth';
@@ -9,34 +10,36 @@ import type { User } from '@/types';
 interface NavLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 const guestLinks: NavLink[] = [
   { label: '找美容師', href: '/groomers' },
   { label: '服務', href: '/pet-services' },
   { label: '成為美容師', href: '/become-groomer' },
-  { label: '登入', href: '/login' },
+  { label: '網站', href: 'https://pawpawspace.com', external: true },
+  { label: '登入', href: '/auth/login' },
 ];
 
 const customerLinks: NavLink[] = [
   { label: '找美容師', href: '/groomers' },
   { label: '服務', href: '/pet-services' },
-  { label: '我的預約', href: '/bookings' },
+  { label: '我的預約', href: '/account/bookings' },
   { label: '帳號', href: '/account' },
 ];
 
 const groomerLinks: NavLink[] = [
   { label: '儀表板', href: '/pro/dashboard' },
-  { label: '訂單', href: '/orders' },
-  { label: '收入', href: '/earnings' },
-  { label: '設定', href: '/settings' },
+  { label: '訂單', href: '/pro/bookings' },
+  { label: '收入', href: '/pro/earnings' },
+  { label: '設定', href: '/pro/settings' },
 ];
 
 const adminLinks: NavLink[] = [
   { label: '儀表板', href: '/admin/dashboard' },
-  { label: '美容師管理', href: '/admin/groomers' },
-  { label: '訂單', href: '/admin/orders' },
-  { label: '目錄', href: '/admin/catalog' },
+  { label: '美容師管理', href: '/admin/professionals' },
+  { label: '訂單', href: '/admin/bookings' },
+  { label: '目錄', href: '/admin/catalog/services' },
   { label: '資源', href: '/admin/resources' },
 ];
 
@@ -82,29 +85,45 @@ export default function Navbar() {
     setUser(null);
     setDropdownOpen(false);
     setMobileOpen(false);
-    router.push('/');
+    router.push('/groomers');
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-white/95 border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-blue-600">
-            PetGroom
-          </Link>
+        <div className="flex h-[72px] items-center justify-between">
+          {/* Logo — links to main website */}
+          <a href="https://pawpawspace.com" className="flex items-center gap-2">
+            <Image src="/logo.svg" alt="Paw Paw" width={36} height={36} className="rounded-lg" />
+            <span>
+              <span className="text-[#4884B8] font-semibold">Paw Paw</span>
+              <span className="ml-1.5 text-gray-500 font-medium">泡泡</span>
+            </span>
+          </a>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex md:items-center md:gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#111827] hover:bg-gray-100 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#111827] hover:bg-gray-100 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
 
           {/* Desktop right side */}
@@ -115,7 +134,7 @@ export default function Navbar() {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-blue-700">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#DBEAF5] text-sm font-semibold text-[#4884B8]">
                     {user.name.charAt(0)}
                   </span>
                   <span>{user.name}</span>
@@ -176,23 +195,36 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-gray-200 bg-white md:hidden">
+        <div className="border-t border-gray-100 bg-white md:hidden">
           <div className="space-y-1 px-4 py-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
             {user && (
               <>
                 <div className="my-2 border-t border-gray-100" />
                 <div className="flex items-center gap-3 px-3 py-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-blue-700">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#DBEAF5] text-sm font-semibold text-[#4884B8]">
                     {user.name.charAt(0)}
                   </span>
                   <div>

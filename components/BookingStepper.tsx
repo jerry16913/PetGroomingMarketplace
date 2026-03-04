@@ -8,7 +8,7 @@ interface BookingStepperProps {
   className?: string;
 }
 
-const defaultSteps = ['選美容師', '選服務', '選寵物', '選日期', '選時間', '確認'];
+const defaultSteps = ['選美容師', '選服務', '選寵物', '選時間', '確認'];
 
 export default function BookingStepper({
   currentStep,
@@ -28,14 +28,14 @@ export default function BookingStepper({
               <div className="flex flex-col items-center">
                 <div
                   className={`
-                    flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-colors
-                    ${isCompleted ? 'bg-green-500 text-white' : ''}
-                    ${isCurrent ? 'bg-blue-600 text-white ring-4 ring-blue-100' : ''}
-                    ${!isCompleted && !isCurrent ? 'bg-gray-200 text-gray-500' : ''}
+                    flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold transition-colors
+                    ${isCompleted ? 'bg-[#4884B8] text-white' : ''}
+                    ${isCurrent ? 'border-2 border-[#4884B8] text-[#4884B8] bg-white' : ''}
+                    ${!isCompleted && !isCurrent ? 'border-2 border-gray-200 text-gray-400 bg-white' : ''}
                   `}
                 >
                   {isCompleted ? (
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -49,9 +49,9 @@ export default function BookingStepper({
                 </div>
                 <span
                   className={`
-                    mt-2 text-xs font-medium text-center max-w-[80px]
-                    ${isCompleted ? 'text-green-600' : ''}
-                    ${isCurrent ? 'text-blue-600' : ''}
+                    mt-1.5 text-[11px] font-medium text-center max-w-[72px]
+                    ${isCompleted ? 'text-[#4884B8]' : ''}
+                    ${isCurrent ? 'text-[#4884B8]' : ''}
                     ${!isCompleted && !isCurrent ? 'text-gray-400' : ''}
                   `}
                 >
@@ -63,8 +63,8 @@ export default function BookingStepper({
               {index < steps.length - 1 && (
                 <div
                   className={`
-                    mx-2 mb-6 h-0.5 flex-1 rounded-full
-                    ${index < currentStep ? 'bg-green-500' : 'bg-gray-200'}
+                    mx-2 mb-6 h-[1.5px] flex-1
+                    ${index < currentStep ? 'bg-[#4884B8]' : 'bg-gray-200'}
                   `}
                 />
               )}

@@ -14,6 +14,7 @@ interface SelectProps {
   placeholder?: string;
   className?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 export default function Select({
@@ -25,6 +26,7 @@ export default function Select({
   placeholder,
   className = '',
   required = false,
+  disabled = false,
 }: SelectProps) {
   const selectId = label?.toLowerCase().replace(/\s+/g, '-');
 
@@ -45,12 +47,14 @@ export default function Select({
           value={value}
           onChange={onChange}
           required={required}
+          disabled={disabled}
           className={`
             w-full appearance-none rounded-lg border bg-white
-            px-3.5 py-2.5 pr-10 text-sm text-gray-900
+            px-3.5 py-2 pr-10 text-sm text-gray-900
             transition-colors duration-150
-            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            ${error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
+            focus:outline-none focus:ring-2 focus:ring-[#4884B8]/20 focus:border-[#4884B8]
+            disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
+            ${error ? 'border-red-300 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-200'}
           `}
         >
           {placeholder && (
@@ -64,7 +68,6 @@ export default function Select({
             </option>
           ))}
         </select>
-        {/* Chevron icon */}
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
           <svg
             className="h-4 w-4 text-gray-400"

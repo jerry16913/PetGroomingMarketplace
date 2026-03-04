@@ -56,7 +56,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center gap-1 rounded-lg px-2 h-8 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
       >
         <svg
           className="h-4 w-4"
@@ -80,7 +80,7 @@ export default function Pagination({
           page === '...' ? (
             <span
               key={`ellipsis-${idx}`}
-              className="px-2 py-2 text-sm text-gray-400"
+              className="min-w-[2rem] h-8 flex items-center justify-center text-sm text-gray-400"
             >
               ...
             </span>
@@ -89,11 +89,11 @@ export default function Pagination({
               key={page}
               onClick={() => onPageChange(page)}
               className={`
-                min-w-[2.25rem] rounded-lg px-3 py-2 text-sm font-medium
+                min-w-[2rem] h-8 rounded-lg text-sm font-medium
                 transition-colors
                 ${
                   page === currentPage
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#4884B8] text-white shadow-sm'
                     : 'text-gray-600 hover:bg-gray-100'
                 }
               `}
@@ -109,7 +109,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center gap-1 rounded-lg px-2 h-8 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
       >
         Next
         <svg

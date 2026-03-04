@@ -6,6 +6,7 @@ import { getCategories } from '@/lib/api';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Skeleton from '@/components/ui/Skeleton';
+import EmptyState from '@/components/ui/EmptyState';
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -29,7 +30,10 @@ export default function AdminCategoriesPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">服務分類</h1>
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">服務分類</h1>
+          <p className="text-sm text-gray-500 mt-1">本平台專營寵物美容服務，以下為目前的服務分類。</p>
+        </div>
         <Skeleton variant="rect" height={200} />
       </div>
     );
@@ -46,7 +50,7 @@ export default function AdminCategoriesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">服務分類</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">服務分類</h1>
         <p className="mt-1 text-sm text-gray-500">
           本平台專營寵物美容服務，以下為目前的服務分類。
         </p>
@@ -74,7 +78,10 @@ export default function AdminCategoriesPage() {
 
       {categories.length === 0 && (
         <Card>
-          <p className="py-8 text-center text-sm text-gray-500">尚無分類資料。</p>
+          <EmptyState
+            title="尚無分類資料"
+            description="目前沒有任何服務分類。"
+          />
         </Card>
       )}
     </div>

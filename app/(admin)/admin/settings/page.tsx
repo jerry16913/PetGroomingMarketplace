@@ -37,7 +37,10 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">平台設定</h1>
+      <div>
+        <h1 className="text-2xl font-semibold text-gray-900">平台設定</h1>
+        <p className="text-sm text-gray-500 mt-1">管理平台基本設定、費率與政策。</p>
+      </div>
 
       <Card>
         <div className="space-y-6">
@@ -62,7 +65,7 @@ export default function AdminSettingsPage() {
                 step="0.5"
                 value={commissionRate}
                 onChange={(e) => setCommissionRate(e.target.value)}
-                className="w-24 rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-24 rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4884B8] focus:border-[#4884B8]"
               />
               <span className="text-sm text-gray-500">%</span>
             </div>

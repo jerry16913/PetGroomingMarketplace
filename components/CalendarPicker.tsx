@@ -130,8 +130,8 @@ export default function CalendarPicker({
               className={`
                 h-10 rounded-lg text-sm font-medium transition-colors
                 ${disabled ? 'text-gray-300 cursor-not-allowed' : 'hover:bg-gray-100 cursor-pointer'}
-                ${selected ? 'bg-blue-600 text-white hover:bg-blue-700' : ''}
-                ${!selected && todayMark ? 'ring-2 ring-blue-200 text-blue-600' : ''}
+                ${selected ? 'bg-[#4884B8] text-white hover:bg-[#3E78AC]' : ''}
+                ${!selected && todayMark ? 'ring-2 ring-[#DBEAF5] text-[#4884B8]' : ''}
                 ${!selected && !disabled && !todayMark ? 'text-gray-700' : ''}
               `}
             >

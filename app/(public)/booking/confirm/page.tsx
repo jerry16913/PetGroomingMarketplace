@@ -15,7 +15,7 @@ import type { Resource, Pet } from '@/types';
 
 export default function BookingConfirmPage() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-2xl px-4 py-10"><Skeleton variant="rect" height={300} /></div>}>
+    <Suspense fallback={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><Skeleton variant="rect" height={300} /></div>}>
       <BookingConfirmContent />
     </Suspense>
   );
@@ -139,7 +139,7 @@ function BookingConfirmContent() {
   // Validate that we have the required params
   if (!groomerId || !serviceId || !date || !time) {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="rounded-lg bg-yellow-50 p-6 text-center text-yellow-700">
           缺少預約資訊，請重新操作。
         </div>
@@ -153,7 +153,7 @@ function BookingConfirmContent() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-2xl font-bold text-gray-900 mb-8">確認預約</h1>
 
       {/* Booking Summary */}
@@ -222,7 +222,7 @@ function BookingConfirmContent() {
             <span className="text-base font-semibold text-gray-900">
               費用
             </span>
-            <span className="text-base font-semibold text-blue-600">
+            <span className="text-base font-semibold text-[#4884B8]">
               {formatPrice(price)}
             </span>
           </div>

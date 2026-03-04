@@ -142,7 +142,7 @@ export default function ProEarningsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">收入報表</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">收入報表</h1>
         <p className="mt-1 text-sm text-gray-500">
           查看您的收入統計與交易明細。
         </p>
@@ -190,7 +190,7 @@ export default function ProEarningsPage() {
                   </span>
                   {/* Bar */}
                   <div
-                    className="w-12 rounded-t-md bg-blue-500 transition-all duration-500 sm:w-16"
+                    className="w-12 rounded-t-md bg-[#4884B8] transition-all duration-500 sm:w-16"
                     style={{ height: barHeight }}
                   />
                   {/* Month label */}
@@ -203,17 +203,19 @@ export default function ProEarningsPage() {
       </Card>
 
       {/* Transaction details */}
-      <div>
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">
-          交易明細
-        </h2>
+      <Card padding="none">
+        <div className="px-6 py-4 border-b border-gray-200">
+          <h2 className="text-base font-semibold text-gray-900">
+            交易明細
+          </h2>
+        </div>
         <DataTable<Booking & Record<string, unknown>>
           columns={transactionColumns}
           data={transactions as (Booking & Record<string, unknown>)[]}
           loading={loading}
           emptyMessage="尚無已完成的交易紀錄"
         />
-      </div>
+      </Card>
     </div>
   );
 }

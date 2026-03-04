@@ -49,7 +49,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 transition-opacity"
+        className="absolute inset-0 bg-black/40 backdrop-enter"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -61,8 +61,8 @@ export default function Modal({
         aria-labelledby={title ? 'modal-title' : undefined}
         className={`
           relative w-full ${sizeClasses[size]} mx-4
-          rounded-xl bg-white shadow-xl
-          animate-in fade-in zoom-in-95
+          rounded-2xl bg-white shadow-2xl
+          modal-enter
         `}
       >
         {/* Header */}

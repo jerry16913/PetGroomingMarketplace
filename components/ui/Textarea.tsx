@@ -9,6 +9,7 @@ interface TextareaProps {
   rows?: number;
   className?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 export default function Textarea({
@@ -20,6 +21,7 @@ export default function Textarea({
   rows = 4,
   className = '',
   required = false,
+  disabled = false,
 }: TextareaProps) {
   const textareaId = label?.toLowerCase().replace(/\s+/g, '-');
 
@@ -41,12 +43,14 @@ export default function Textarea({
         onChange={onChange}
         rows={rows}
         required={required}
+        disabled={disabled}
         className={`
-          w-full rounded-lg border px-3.5 py-2.5 text-sm text-gray-900
+          w-full rounded-lg border bg-white px-3.5 py-2 text-sm text-gray-900
           placeholder:text-gray-400
           transition-colors duration-150 resize-y
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-          ${error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
+          focus:outline-none focus:ring-2 focus:ring-[#4884B8]/20 focus:border-[#4884B8]
+          disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
+          ${error ? 'border-red-300 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-200'}
         `}
       />
       {error && (

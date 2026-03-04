@@ -30,7 +30,7 @@ export default function PetServicesPage() {
 
   if (error) {
     return (
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="rounded-lg bg-red-50 p-6 text-center text-red-600">
           {error}
         </div>
@@ -39,9 +39,9 @@ export default function PetServicesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Page Header */}
-      <div className="mb-10">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">寵物美容服務</h1>
         <p className="mt-2 text-gray-500">
           瀏覽所有可預約的寵物美容服務項目
@@ -49,7 +49,7 @@ export default function PetServicesPage() {
       </div>
 
       {loading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
             <Skeleton key={i} variant="rect" height={160} />
           ))}
@@ -57,7 +57,7 @@ export default function PetServicesPage() {
       ) : services.length === 0 ? (
         <div className="py-12 text-center text-gray-500">暫無服務項目</div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => {
             const truncatedDescription =
               service.description.length > 80
@@ -100,10 +100,10 @@ export default function PetServicesPage() {
                     </span>
                   </div>
 
-                  {/* CTA — link to groomers */}
+                  {/* CTA -- link to groomers */}
                   <Link
                     href={`/groomers?service=${service.id}`}
-                    className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                    className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-[#4884B8] hover:text-[#4884B8] transition-colors"
                   >
                     瀏覽美容師
                     <svg
